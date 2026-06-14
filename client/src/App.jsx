@@ -5,8 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import MyCourses from "./pages/MyCourses";
 
-import ProtectedRoute from "./routes/ProtectedRoute";
-import RoleProtectedRoute from "./routes/RoleProtectedRoute";
+import ProtectedRoute from "./Routes/ProtectedRoute";
+import RoleProtectedRoute from "./Routes/RoleProtectedRoute";
 
 // SAFE IMPORT (prevents blank page crash)
 let AdminCreateCourse;
