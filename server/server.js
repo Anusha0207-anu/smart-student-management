@@ -3,11 +3,11 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
-const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./Routes/authRoutes");
+const studentRoutes = require("./Routes/studentRoutes");
+const adminRoutes = require("./Routes/adminRoutes");
+const courseRoutes = require("./Routes/courseRoutes");
 const app = express();
-const studentRoutes = require("./routes/studentRoutes");
-const adminRoutes = require("./routes/adminRoutes");
-const courseRoutes = require("./routes/courseRoutes");
 // Connect MongoDB
 connectDB();
 
