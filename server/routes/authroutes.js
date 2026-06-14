@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("./Routes/authRoutes");
 
 const router = express.Router();
 
