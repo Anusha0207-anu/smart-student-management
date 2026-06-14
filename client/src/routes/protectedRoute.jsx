@@ -1,10 +1,10 @@
-import { Navigate } from "react-router-dom";
+import React from "react";
 
 function ProtectedRoute({ children }) {
-  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!token) {
-    return <Navigate to="/" replace />;
+  if (!user) {
+    return <h2>Please Login First</h2>;
   }
 
   return children;

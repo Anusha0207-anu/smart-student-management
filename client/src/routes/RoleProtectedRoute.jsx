@@ -1,14 +1,10 @@
-import { Navigate } from "react-router-dom";
+import React from "react";
 
 function RoleProtectedRoute({ children, allowedRoles }) {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!user) {
-    return <Navigate to="/" replace />;
-  }
-
-  if (!allowedRoles.includes(user.role)) {
-    return <Navigate to="/dashboard" replace />;
+  if (!user || !allowedRoles.includes(user.role)) {
+    return <h2>Access Denied</h2>;
   }
 
   return children;
