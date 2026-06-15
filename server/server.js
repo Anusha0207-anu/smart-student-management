@@ -3,20 +3,25 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
-const authRoutes = require("./Routes/authRoutes");
-const studentRoutes = require("./Routes/studentRoutes");
-const adminRoutes = require("./Routes/adminRoutes");
-const courseRoutes = require("./Routes/courseRoutes");
+
+const authRoutes = require("./routes/authroutes");
+const studentRoutes = require("./routes/studentRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const courseRoutes = require("./routes/courseRoutes");
+
 const app = express();
+
 // Connect MongoDB
 connectDB();
 
 app.use(cors());
 app.use(express.json());
+
 app.use("/api/auth", authRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/courses", courseRoutes);
+
 app.get("/", (req, res) => {
   res.send("Smart Student Learning & Placement Management System API");
 });
