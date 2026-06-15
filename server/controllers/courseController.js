@@ -56,7 +56,7 @@ const getCourseById = async (req, res) => {
     });
   }
 };
-const User = require("../models/User");
+const User = require("../models/user");
 
 const enrollCourse = async (req, res) => {
   try {
