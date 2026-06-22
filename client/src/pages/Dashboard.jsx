@@ -8,29 +8,70 @@ function Dashboard() {
       <Navbar />
 
       <div className="container">
-        <h1>Dashboard</h1>
-        <h3>Welcome {user?.name}</h3>
+        <div className="welcome">
+          <h1>Student Dashboard</h1>
+          <p>Welcome back, {user?.name} 👋</p>
+        </div>
 
         <div className="grid">
-
           <div className="card">
-            <h3>Profile</h3>
-            <p>Name: {user?.name}</p>
-            <p>Role: {user?.role}</p>
+            <h2>👤 Profile</h2>
+
+            <p>
+              <strong>Name:</strong> {user?.name}
+            </p>
+
+            <p>
+              <strong>Email:</strong> {user?.email}
+            </p>
+
+            <p>
+              <strong>Role:</strong> {user?.role}
+            </p>
           </div>
 
           <div className="card">
-            <h3>Courses</h3>
-            <p>Browse available courses</p>
+            <h2>📚 Courses</h2>
+
+            <p>Browse all available courses and enroll.</p>
+
+            <button
+              className="btn"
+              onClick={() => (window.location.href = "/courses")}
+            >
+              View Courses
+            </button>
+          </div>
+
+          <div className="card">
+            <h2>🎓 My Courses</h2>
+
+            <p>Check your enrolled courses.</p>
+
+            <button
+              className="btn"
+              onClick={() => (window.location.href = "/my-courses")}
+            >
+              My Courses
+            </button>
           </div>
 
           {user?.role === "admin" && (
             <div className="card">
-              <h3>Admin Panel</h3>
-              <p>Create and manage courses</p>
+              <h2>⚙️ Admin Panel</h2>
+
+              <p>Create and manage courses.</p>
+
+              <button
+                className="btn"
+                onClick={() =>
+                  (window.location.href = "/admin/create-course")
+                }
+              >
+                Manage
+              </button>
             </div>
           )}
-
         </div>
       </div>
     </>

@@ -16,16 +16,12 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
-    const newUser = new User({
-      name,
-      email,
-      password: hashedPassword,
-      role,
-    });
+   const newUser = new User({
+  name,
+  email,
+  password,
+  role,
+});
 
     // Save user
     await newUser.save();

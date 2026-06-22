@@ -9,25 +9,33 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar">
-      <div>
+    <nav className="navbar">
+      <div className="logo">
+        <h2>SMS</h2>
+      </div>
+
+      <div className="nav-links">
         <Link to="/dashboard">Dashboard</Link>
+
         <Link to="/courses">Courses</Link>
+
         <Link to="/my-courses">My Courses</Link>
 
         {user?.role === "admin" && (
-          <Link to="/admin/create-course">Create Course</Link>
+          <Link to="/admin/create-course">
+            Create Course
+          </Link>
         )}
       </div>
 
-      <div>
-        <span style={{ marginRight: "10px" }}>
-          {user?.role}
-        </span>
+      <div className="user-section">
+        <span>{user?.name}</span>
 
-        <button onClick={logout}>Logout</button>
+        <button className="logout-btn" onClick={logout}>
+          Logout
+        </button>
       </div>
-    </div>
+    </nav>
   );
 }
 

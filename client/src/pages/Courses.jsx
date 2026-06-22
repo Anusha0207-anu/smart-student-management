@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../api/api";
 import Navbar from "../components/Navbar";
 
 function Courses() {
   const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
 
   const fetchCourses = async () => {
-    const res = await API.get("/courses");
-    setCourses(res.data);
+    try {
+      const res = await API.get("/courses");
+      setCourses(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const enroll = async (courseId) => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    await API.post("/courses/enroll", {
-      userId: user._id,
-      courseId,
+  const enroll = (course) => {
+    navigate("/enroll-course", {
+      state: {
+        course,
+      },
     });
-
-    alert("Enrolled Successfully");
   };
 
   useEffect(() => {
@@ -30,20 +33,60 @@ function Courses() {
       <Navbar />
 
       <div className="container">
-        <h1>Courses</h1>
+
+        <div className="welcome">
+          <h1>📚 Available Courses</h1>
+          <p>Choose a course and begin your learning journey.</p>
+        </div>
 
         <div className="grid">
-          {courses.map((c) => (
-            <div className="card" key={c._id}>
-              <h3>{c.title}</h3>
-              <p>{c.description}</p>
 
-              <button className="btn" onClick={() => enroll(c._id)}>
-                Enroll
-              </button>
+          {courses.length > 0 ? (
+            courses.map((course) => (
+              <div className="card" key={course._id}>
+
+                <div
+                  style={{
+                    fontSize: "60px",
+                    textAlign: "center",
+                    marginBottom: "15px",
+                  }}
+                >
+                  📘
+                </div>
+
+                <h2>{course.title}</h2>
+
+                <p>{course.description}</p>
+
+                <p>
+                  <strong>Trainer:</strong>{" "}
+                  {course.trainer || "Not Assigned"}
+                </p>
+
+                <p>
+                  <strong>Duration:</strong>{" "}
+                  {course.duration || "N/A"}
+                </p>
+
+                <button
+                  className="btn"
+                  onClick={() => enroll(course)}
+                >
+                  Enroll Now
+                </button>
+
+              </div>
+            ))
+          ) : (
+            <div className="card">
+              <h2>No Courses Available</h2>
+              <p>Please check again later.</p>
             </div>
-          ))}
+          )}
+
         </div>
+
       </div>
     </>
   );

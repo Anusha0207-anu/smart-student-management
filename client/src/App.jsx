@@ -7,7 +7,8 @@ import MyCourses from "./pages/MyCourses";
 
 import ProtectedRoute from "./Routes/ProtectedRoute";
 import RoleProtectedRoute from "./Routes/RoleProtectedRoute";
-
+import Register from "./pages/Register";
+import EnrollCourse from "./pages/EnrollCourse";
 // SAFE IMPORT (prevents blank page crash)
 let AdminCreateCourse;
 try {
@@ -23,7 +24,7 @@ function App() {
 
         {/* PUBLIC */}
         <Route path="/" element={<Login />} />
-
+        <Route path="/register" element={<Register />} />
         {/* PROTECTED */}
         <Route
           path="/dashboard"
@@ -63,7 +64,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-
+        <Route
+  path="/enroll-course"
+  element={
+    <ProtectedRoute>
+      <EnrollCourse />
+    </ProtectedRoute>
+  }
+/>
       </Routes>
     </BrowserRouter>
   );

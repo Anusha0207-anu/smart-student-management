@@ -2,27 +2,27 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../api/api";
 
-function Login() {
+function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginUser = async (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await API.post("/auth/login", {
+      await API.post("/auth/register", {
+        name,
         email,
         password,
+        role: "student",
       });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      alert("Registration Successful");
 
-      alert("Login Successful");
-
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } catch (err) {
-      alert(err.response?.data?.message || "Login Failed");
+      alert(err.response?.data?.message || "Registration Failed");
     }
   };
 
@@ -30,11 +30,18 @@ function Login() {
     <div className="auth-container">
       <div className="auth-box">
 
-        <h1>Welcome Back</h1>
+        <h1>Create Account</h1>
 
-        <p>Login to your account</p>
+        <p>Register to continue</p>
 
-        <form onSubmit={loginUser}>
+        <form onSubmit={registerUser}>
+
+          <input
+            type="text"
+            placeholder="Enter Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
           <input
             type="email"
@@ -51,13 +58,13 @@ function Login() {
           />
 
           <button className="auth-btn" type="submit">
-            Login
+            Register
           </button>
 
         </form>
 
         <div className="auth-link">
-          Don't have an account? <Link to="/register">Register</Link>
+          Already have an account? <Link to="/">Login</Link>
         </div>
 
       </div>
@@ -65,4 +72,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

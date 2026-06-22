@@ -27,7 +27,22 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
+const User = require("./models/user");
 
+app.get("/test-db", async (req, res) => {
+  try {
+    const count = await User.countDocuments();
+    res.json({
+      success: true,
+      users: count,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
